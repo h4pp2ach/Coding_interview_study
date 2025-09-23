@@ -37,5 +37,5 @@ int main() {
         }
         if (!check) break;
     }
-    return 0;  // 정상 종료
+    return 0;
 }
