@@ -68,44 +68,7 @@ int main() {
 
     int gearNumber, rotateDirection;
 
-    /* 1번 시도
-    for (int i = 0; i < k; ++i){
-        cin >> gearNumber >> rotateDirection;
-
-        std::queue<stepInfo> q;
-        q.push({gearNumber, rotateDirection});
-
-        while(!q.empty()){
-            auto [cur, dir] = q.front();
-            q.pop();
-            rotate(cur, dir);
-
-            int currentGear_3 = findState(cur, gear_12index[cur], 2);
-            int currentGear_9 = findState(cur, gear_12index[cur], 6);
-
-            // 왼쪽 톱니바퀴
-            if (cur > 1){
-                int left = cur - 1;
-                int leftGear_3 = findState(left, gear_12index[left], 2);
-                if (currentGear_9 != leftGear_3){
-                    q.push({left, -dir});
-                }
-            }
-
-            // 오른쪽 톱니바퀴
-            if (cur < 4){
-                int right = cur + 1;
-                int rightGear_9 = findState(right, gear_12index[right], 6);
-                if (currentGear_3 != rightGear_9){
-                    q.push({right, -dir});
-                }
-            }
-
-        }
-    }
-    */
-
-    // 2번째 방법
+    // K step 연산
     for (int i = 0; i < k; ++i){
         cin >> gearNumber >> rotateDirection;
 
@@ -170,3 +133,43 @@ void rotate(int gearNumber, int rotateDirection){
         gear_12index[gearNumber] = (gear_12index[gearNumber] + 1 )%8;
     }
 }
+
+
+
+
+/* 1번 시도
+for (int i = 0; i < k; ++i){
+    cin >> gearNumber >> rotateDirection;
+
+    std::queue<stepInfo> q;
+    q.push({gearNumber, rotateDirection});
+
+    while(!q.empty()){
+        auto [cur, dir] = q.front();
+        q.pop();
+        rotate(cur, dir);
+
+        int currentGear_3 = findState(cur, gear_12index[cur], 2);
+        int currentGear_9 = findState(cur, gear_12index[cur], 6);
+
+        // 왼쪽 톱니바퀴
+        if (cur > 1){
+            int left = cur - 1;
+            int leftGear_3 = findState(left, gear_12index[left], 2);
+            if (currentGear_9 != leftGear_3){
+                q.push({left, -dir});
+            }
+        }
+
+        // 오른쪽 톱니바퀴
+        if (cur < 4){
+            int right = cur + 1;
+            int rightGear_9 = findState(right, gear_12index[right], 6);
+            if (currentGear_3 != rightGear_9){
+                q.push({right, -dir});
+            }
+        }
+
+    }
+}
+*/
