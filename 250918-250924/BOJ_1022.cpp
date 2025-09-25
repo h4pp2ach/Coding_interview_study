@@ -1,8 +1,8 @@
 /*
 소용돌이 예쁘게 출력하기 - BOJ 1022
 
-시간복잡도 :
-공간복잡도 :
+시간복잡도 : O((r2−r1+1) × (c2−c1+1))
+공간복잡도 : O(1)
 
 문제 접근
         시간제한 2초, 메모리 제한 128MB
@@ -27,7 +27,7 @@
         
 
 제출 결과
-메모리: KB, 시간: ms
+메모리: 2020KB, 시간: 0ms
 
 */
 
@@ -69,7 +69,7 @@ int calValue(int r, int c){
     if (r == layer) num = (2*layer + 1)*(2*layer + 1) - (layer - c);
     else if (c == -layer) num = (2*layer + 1)*(2*layer + 1) - 2*layer - (layer - r);
     else if (r == -layer) num = (2*layer + 1)*(2*layer + 1) - 4*layer - (layer + c);
-    else if (c == layer) num = (2*layer + 1)*(2*layer + 1) - 6*layer - (layer - c);
+    else if (c == layer) num = (2*layer + 1)*(2*layer + 1) - 6*layer - (layer + r);
 
     return num;
 }
