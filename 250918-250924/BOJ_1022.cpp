@@ -1,4 +1,5 @@
 /*
+소용돌이 예쁘게 출력하기 - BOJ 1022
 
 시간복잡도 :
 공간복잡도 :
@@ -12,7 +13,7 @@
 
         좌표 r,c가 있다고 하면,
 
-        r, c 중 크기의 최댓값 -> Layer가 됨. i = 0번 레이어부터 시작.
+        r, c 중 크기의 최댓값 → Layer가 됨. i = 0번 레이어부터 시작.
         그리고 그 때의 최댓값 = (2i+1)^2은 항상 오른쪽 아래 모서리
 
         다시 i번 레이어 위의 점 (r,c)에서 오른쪽 아래 모서리를 기준으로 따라가면,
@@ -22,28 +23,46 @@
         c = i이고 r != i 일 때, num = ((2i+1)^2 - 6i) - (i+r)
 
         
-        다시 주어진 범위 내에서 최댓값을 먼저 찾고, 자리수를 계산해서 정렬할 수 있도록..
+        주어진 범위 내에서 최댓값을 먼저 찾고, 몇자리 수인지에 따라 앞에 공백 추가해서 정렬
+        
+
+제출 결과
+메모리: KB, 시간: ms
+
 */
 
 #include <iostream> 
 #include <vector>
 #include <string>
 #include <cmath>
+#include <iomanip>
 
 using std::cin;
+using std::cout;
+using std::endl;
 
-auto calValue(int r, int c);
-auto findMaxVal(int r1, int c1, int r2, int c2);
+int calValue(int r, int c);
+int findMaxVal(int r1, int c1, int r2, int c2);
 
 int main() {
     
     int r1, r2, c1, c2; cin >> r1 >> c1 >> r2 >> c2;
 
-    //
+    int maxVal = findMaxVal(r1, c1, r2, c2);
+    int maxValLength = std::to_string(maxVal).size();
+
+    for (int r = r1 ; r <= r2; ++r){
+        for (int c = c1; c <= c2; ++c){
+            int val = calValue(r, c);
+            cout << std::setw(maxValLength) << std::setfill(' ') << val;
+            cout << " ";
+        }
+        cout << endl;
+    }
     return 0;
 }
 
-auto calValue(int r, int c){
+int calValue(int r, int c){
     int layer = (abs(r) > abs(c)) ? abs(r) : abs(c);
     
     int num;
@@ -55,12 +74,15 @@ auto calValue(int r, int c){
     return num;
 }
 
-auto findMaxVal(int r1, int c1, int r2, int c2){
+int findMaxVal(int r1, int c1, int r2, int c2){
     int maxVal = -1;
 
-    for (int r = r1; r <= r2; ++r){
+    for (int r = r1 ; r <= r2; ++r){
         for (int c = c1; c <= c2; ++c){
-            
+            int val = calValue(r, c);
+            if (maxVal < val) maxVal = val;
         }
     }
+
+    return maxVal;
 }
